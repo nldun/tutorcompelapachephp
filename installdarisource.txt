@@ -1,0 +1,96 @@
+sumber=https://www.rootusers.com/installing-apache-2-4-and-php-5-4-from-source/#google_vignette
+https://stackoverflow.com/questions/15511943/troubles-with-rvm-and-openssl
+https://stackoverflow.com/questions/72258129/how-to-make-mod-ssl-pointing-to-different-openssl-directory-instead-of-default-o
+
+
+
+sumber file beserta link untuk mendapatkan sumber kodenya.
+openssl=https://ftp.openssl.org/source/old/
+apache=https://archive.apache.org/dist/httpd/
+apr=https://archive.apache.org/dist/apr/
+apr-util=https://archive.apache.org/dist/apr/
+pcr=https://ftp.exim.org/pub/pcre/
+php=http://php.adamharvey.name/downloads.php
+
+cara install nya
+karena menggunakan gentoo linux maka.
+
+[APR]
+wget http://apache.mirror.uber.com.au//apr/apr-1.4.6.tar.gz
+tar xf apr-1.4.6.tar.gz
+cd apr-1.4.6/
+./configure
+make
+make install
+
+[APR UTIL]
+wget http://apache.mirror.uber.com.au//apr/apr-util-1.4.1.tar.gz
+tar xf apr-util-1.4.1.tar.gz
+cd apr-util-1.4.1/
+./configure --with-apr=/usr/local/apr/bin/apr-1-config
+make
+make install
+
+[PCRE]
+tar xf pcre-8.30.tar.gz
+cd pcre-8.30/
+./configure
+make
+make install
+
+
+[APACHE]
+wget http://apache.mirror.uber.com.au//httpd/httpd-2.4.2.tar.gz
+tar xf httpd-2.4.2.tar.gz
+cd httpd-2.4.2/
+./configure --enable-so atau bisa juga
+./configure --with-apr=/usr/local/apr/ --with-apr=/usr/local/apr/bin/apr-1-config --with-ssl=/home/stream/.rvm/usr --enable-so
+make
+make install
+
+--enable-so dibutuhkan nanti untuk pemasangan PHP
+--with-ssl=/home/stream/.rvm/usr memakai versi openssl 1.0.1 kalau ga salah dari rvm ruby installation (rvm pkg install openssl)
+
+JIKA BERHASIL TERINSTALL APACHE NYA ALHAMDULILLAH. JIKA BELUM BERJUANG YA.
+
+cd /usr/local/apache2/bin/
+./apachectl start
+./apachectl -v
+Server version: Apache/2.4.2 (Unix)
+Server built:   Jul 26 2012 20:51:23
+
+
+cd /root
+tar xf php-5.4.5.tar.gz
+cd php-5.4.5/
+./configure --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql=mysqlnd
+make
+make install
+php -v
+PHP 5.4.5 (cli) (built: Jul 26 2012 21:18:58)
+
+
+
+KONFIGURASI
+cp /root/php-5.4.5/libs/libphp5.so /usr/local/apache2/modules/
+vi /usr/local/apache2/conf/httpd.conf
+tempel di paling bawah file sahaja.
+AddType text/html .php
+AddHandler php5-script	.php
+LoadModule php5_module modules/libphp5.so
+
+lalu restart apache
+cd /usr/local/apache2/bin/
+./apachectl restart
+
+cek php lewat browser
+vi /usr/local/apache2/htdocs/index.php
+<?php
+phpinfo();
+?>
+
+lalu restart kembali apache nya kembali
+cd /usr/local/apache2/bin/
+/apachectl restart
+buka browser
+ketikkan di kolom pencarian bisa localhost atau 127.0.0.1/index.php
