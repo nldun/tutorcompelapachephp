@@ -102,5 +102,21 @@ tar -xzf mysql-boost-5.7.20.tar.gz
 cmake . -DCMAKE_INSTALL_PREFIX:PATH=/usr/local/mysql -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/root/mysql-5.7.20/boost -DENABLE_DOWNLOADS=1
 make -j4 atau make aja tapi pas berhasil pakai make -j4
 make install
-
-
+ini pun dengan aplikasi seadanya dan termodifikasi
+seperti kesalahan saat make compile, include <rpc/netdb.h> tidak ada nya rpc yang terbaca atau terinstall di /usr/include lalu inndodb error 166 fix nya menurunkan versi gcc compiler, lalu install juga rpc dari gentoo yaitu net-libs/libtirpc, harus install cmake, make, gcc, openssl, bison, dev-devel/glibc, dev-libs/boos
+lengkapnya"
+sys-libs/glibc rpc multilib-bootstrap -compile-locales
+sys-libs/db cxx
+sys-apps/xinetd rpc
+dev-db/mariadb-10.6.14 innodb-lz4
+=sys-devel/gcc-11.4.1_p20240111 objc objc++ objc-gc
+dev-lang/perl berkdb
+dev-libs/boost tools stacktrace lzma python zlib zstd mpi
+# required by dev-libs/boost-1.84.0-r3::gentoo[mpi]
+# required by dev-libs/boost (argument)
+>=virtual/mpi-2.0-r7 threads cxx
+# required by virtual/mpi-2.0-r7::gentoo
+# required by dev-libs/boost-1.84.0-r3::gentoo[mpi]
+# required by dev-libs/boost (argument)
+>=sys-cluster/openmpi-4.1.6 cxx
+net-libs/libtirpc kerberos static-libs
