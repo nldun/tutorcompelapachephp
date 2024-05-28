@@ -94,3 +94,13 @@ cd /usr/local/apache2/bin/
 /apachectl restart
 buka browser
 ketikkan di kolom pencarian bisa localhost atau 127.0.0.1/index.php
+
+
+INSTALL MYSQL 5.7.20 BOOST di gentoo linux
+wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-boost-5.7.20.tar.gz
+tar -xzf mysql-boost-5.7.20.tar.gz
+cmake . -DCMAKE_INSTALL_PREFIX:PATH=/usr/local/mysql -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/root/mysql-5.7.20/boost -DENABLE_DOWNLOADS=1
+make -j4 atau make aja tapi pas berhasil pakai make -j4
+make install
+
+
