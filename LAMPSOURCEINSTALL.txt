@@ -120,3 +120,32 @@ dev-libs/boost tools stacktrace lzma python zlib zstd mpi
 # required by dev-libs/boost (argument)
 >=sys-cluster/openmpi-4.1.6 cxx
 net-libs/libtirpc kerberos static-libs
+
+setelah install masuk configurasi
+cd /usr/local/mysql2
+mkdir mysql-files
+ls -lh
+chmod 750 mysql-files/
+
+ls -lh
+chown -R mysql:mysql /usr/local/mysql2
+ls -lh
+cd mysql2
+bin/mysqld --initialize --user=mysql
+simpan temporary password
+vi my.cnf
+[client]
+port=9090
+socket=/usr/local/mysql2/mysql.sock
+
+[mysqld]
+port=9090
+socket=/usr/local/mysql2/mysql.sock
+bin/mysqld_safe --user=mysql & 
+bin/mysql -u root -p -S /usr/local/mysql2/mysql.sock (masukan password temporary lalu simpan keluar)
+bin/mysql -u root -p -S /usr/local/mysql2/mysql.sock masuk lagi lalu ganti password
+ALTER USER ' root' @' localhost'  IDENTIFIED BY 'MyNewPassword!:)';
+bin/mysql -u root -p -S /usr/local/mysql2/mysql.sock masuk dengan password baru
+show databases;
+quit;
+selesai. mungkin nanti ditambahkan
