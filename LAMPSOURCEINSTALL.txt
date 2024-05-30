@@ -150,3 +150,13 @@ bin/mysql -u root -p -S /usr/local/mysql2/mysql.sock masuk dengan password baru
 show databases;
 quit;
 selesai. mungkin nanti ditambahkan
+
+
+wget http://dev.mysql.com/get/Downloads/MySQL-5.1/mysql-5.1.73.tar.gz
+
+tar xzvf mysql-5.1.73.tar.gz
+cd mysql-5.1.73
+./configure --prefix=/opt/mysql-5.1.73 --exec-prefix=/opt/mysql-5.1.73 --libexecdir=/opt/mysql-5.1.73/sbin --datadir=/opt/mysql-5.1.73/share --localstatedir=/var/lib/mysql --includedir=/opt/mysql-5.1.73/include --infodir=/opt/mysql-5.1.73/share/info --mandir=/opt/mysql-5.1.73/share/man --enable-shared --enable-static --enable-thread-safe-client --enable-assembler --enable-local-infile --with-fast-mutexes --with-big-tables --with-unix-socket-path=/var/run/mysqld/mysqld.sock --with-mysqld-user=mysql --with-libwrap --with-readline --with-ssl --without-docs --with-extra-charsets=all --with-plugins=max --with-embedded-server --with-embedded-privilege-control CXXFLAGS="-Wno-narrowing -fpermissive"
+
+make
+make install
